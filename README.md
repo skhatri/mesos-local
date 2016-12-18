@@ -9,7 +9,6 @@ Install marathon
 ```
 curl http://downloads.mesosphere.com/marathon/v1.3.5/marathon-1.3.5.tgz
 tar zxf marathon-1.3.5.tgz
-export MARATHON_BIN=./marathon-1.3.5/bin
 
 ```
 
@@ -32,7 +31,7 @@ The key here is to make sure you have docker in containerizers parameter.
 Start Marathon
 
 ```
-$MARATHON_BIN/start --master localhost:5050  --task_launch_timeout=600000 > /tmp/marathon.log &
+./marathon-1.3.5/bin/start --master localhost:5050  --task_launch_timeout=600000 > /tmp/marathon.log &
 ```
 
 Similarly, the task launch timeout should be at least same as mesos-slave's executor_registration_timeout
@@ -91,4 +90,11 @@ Sample Docker Application to run two instances
     }
   ]
 }
+```
+
+
+Creating App using API
+
+```
+curl -H "Content-Type:application/json" -X POST -d @node.json http://localhost:8080/v2/apps
 ```
